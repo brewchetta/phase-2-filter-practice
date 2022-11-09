@@ -1,23 +1,46 @@
+import { useState, useEffect } from "react"
 import PlanetFilter from "./PlanetFilter"
 import PlanetCard from "./PlanetCard"
 
 function PlanetsContainer() {
 
-  const planetsURL = "http://localhost:4000/planets"
+  // STATE //
+  const [planets, setPlanets] = useState([])
+  const [filtered, setFiltered] = useState("all")
 
+  // USE EFFECT //
+  useEffect(() => {
+    const planetsURL = "http://localhost:4000/planets"
+    fetch(planetsURL)
+    .then( res => res.json() )
+    .then( data => setPlanets(data) )
+  }, [])
+
+  // FILTER PLANETS //
+
+  const filteredPlanets = planets.filter( planet => {
+    if (filtered === "all") {
+      return true
+    } else {
+      return planet.is_planet
+    }
+  })
+
+  // MAP PLANETS //
+
+  const mappedPlanets = filteredPlanets.map(planet => <PlanetCard key={planet.id} planet={planet} />)
+
+  // RENDER //
   return (
     <div className="white-border-top">
 
       <h2>Planets of the Solar System</h2>
 
-      {/* You can delete the <p> tag once you've completed the deliverable */}
-      <p>Use the provided URL to fetch the planets, map through and display them. Use the PlanetFilter component to allow users to filter true planets from planetoids.</p>
-
-      <PlanetFilter />
+      <PlanetFilter filtered={filtered} setFiltered={setFiltered} />
 
       <div className="grid column-3">
 
-        {/* show your planets here! */}
+        { mappedPlanets }
 
       </div>
 

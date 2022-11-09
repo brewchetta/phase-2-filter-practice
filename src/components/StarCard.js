@@ -1,13 +1,13 @@
-function StarCard() {
+function StarCard({ star }) {
 
   return (
     <div className="white-border">
 
-      <h3>{/* star name goes here */}</h3>
+      <h3>{ star.name }</h3>
 
-      <p>Light years away: {/* light years away goes here */}</p>
+      <p>Light years away: { star.distance_in_light_years }</p>
 
-      <p>{/* star fact goes here */}</p>
+      <p>{ star.fun_fact }</p>
 
     </div>
   )

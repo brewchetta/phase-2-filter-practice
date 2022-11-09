@@ -1,15 +1,15 @@
-function PlanetCard() {
+function PlanetCard({ planet }) {
 
   return (
     <div className="white-border">
 
-      <h3>{/* planet name goes here */}</h3>
+      <h3>{ planet.name }</h3>
 
-      <p>Planet Orbital Period: {/* orbital period goes here */} days</p>
+      <p>Planet Orbital Period: { planet.orbital_period_in_earth_days } days</p>
 
-      <p>{/* planet fact goes here */}</p>
+      <p>{ planet.fun_fact }</p>
 
-      <p>{/* conditionally render whether it is a planet here */}</p>
+      <p>{ planet.is_planet ? "TRUE PLANET" : "TRANS NEPTUNIAN OBJECT" }</p>
 
     </div>
   )

@@ -1,23 +1,41 @@
+import { useState, useEffect } from "react"
 import MoonFilter from "./MoonFilter"
 import MoonCard from './MoonCard'
 
 function MoonsContainer() {
 
-  const moonsURL = "http://localhost:4000/moons"
+  // STATE //
+  const [moons, setMoons] = useState([])
+  const [search, setSearch] = useState('')
 
+  // USE EFFECT //
+  useEffect(() => {
+    const moonsURL = "http://localhost:4000/moons"
+    fetch(moonsURL)
+    .then( res => res.json() )
+    .then( data => setMoons(data) )
+  }, [])
+
+  // FILTER MOONS //
+  const filteredMoons = moons.filter( moon => {
+    return moon.name.toLowerCase().includes( search.toLowerCase() )
+  })
+
+  // MAP MOONS //
+
+  const mappedMoons = filteredMoons.map(moon => <MoonCard key={moon.id} moon={moon} />)
+
+  // RENDER //
   return (
     <div className="white-border-top">
 
       <h2>Moons</h2>
 
-      {/* You can delete the <p> tag once you've completed the deliverable */}
-      <p>Use the provided URL to fetch the moons, map through and display them. Use the MoonFilter component to allow users to see moons based on name. This should happen as the user types into the form.</p>
-
-      <MoonFilter />
+      <MoonFilter search={search} setSearch={setSearch} />
 
       <div className="grid column-3">
 
-        {/* show your moons here! */}
+        { mappedMoons }
 
       </div>
 
