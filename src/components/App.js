@@ -1,6 +1,6 @@
-import PlanetsContainer from "./PlanetsContainer"
-import StarsContainer from "./StarsContainer"
 import MoonsContainer from "./MoonsContainer"
+import StarsContainer from "./StarsContainer"
+import PlanetsContainer from "./PlanetsContainer"
 import spaceShuttle from '../assets/space-shuttle.png'
 
 function App() {
@@ -9,9 +9,9 @@ function App() {
 
       <img className="absolute fly-in" src={spaceShuttle} alt="space shuttle" />
 
-      <PlanetsContainer />
-      <StarsContainer />
       <MoonsContainer />
+      <StarsContainer />
+      <PlanetsContainer />
 
     </div>
   );
